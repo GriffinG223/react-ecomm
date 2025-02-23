@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  
+
+  backend:
+    build: ./ecommAPI
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./ecommAPI:/app
+      - /app/node_modules
+    command: ["node", "server.js"]  
+

@@ -1,0 +1,31 @@
+            console.log("Server Response:", data);
+
+            if (response.ok) {
+                navigate("/admin/products"); // Redirect on success
+            } else if (response.status === 400) {
+                alert("Validation errors: " + JSON.stringify(data));
+            } else {
+                alert("Unable to create the product!");
+            }
+        } catch (error) {
+            alert("Unable to connect to the server!");
+        }
+    }
+
+    return (
+        <div className="container my-4">
+            <div className="row">
+                <div className="col-md-8 mx-auto rounded border p-4">
+                    <h2 className="text-center mb-5">Create Product</h2>
+
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
+                        <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label">Name</label>
+                            <div className="col-sm-8">
+                                <input className="form-control" name="name" required />
+                            </div>
+                        </div>
+
+                        <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label">Brand</label>
+                                                                                                          53,1          33% 
