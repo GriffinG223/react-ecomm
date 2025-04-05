@@ -1,8 +1,8 @@
 {
   "users": [
     {
-      "email": "admin@admin.com",
-      "password": "$2a$10$bH1jqguVJD7s9LtbW/PLRe5pZ7Mu4qiq8IkkNgBtpd/nVUVK9KdIS",
+      "email": "admin@admin",
+      "password": "$2a$10$a8DNF/niBhYzsqUiXDOA2eIr3RtohZVAVB0PGjJNTxlwS5sJ1eHfm",
       "firstname": "Admin",
       "lastname": "01",
       "phone": "",
@@ -126,6 +126,15 @@
       "phone": "2103258570",
       "address": "sfds lane",
       "id": 14
+    },
+    {
+      "email": "3@3",
+      "password": "$2a$10$a8DNF/niBhYzsqUiXDOA2eIr3RtohZVAVB0PGjJNTxlwS5sJ1eHfm",
+      "firstname": "1",
+      "lastname": "2",
+      "phone": "",
+      "address": "",
+      "id": 15
     }
   ],
   "products": [
