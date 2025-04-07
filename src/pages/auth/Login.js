@@ -12,7 +12,7 @@ export default function Login(){
              return <Navigate to="/" />
          }
 
-
+const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/login";
 
      async function handleSubmit(event){
          event.preventDefault()
@@ -26,7 +26,7 @@ export default function Login(){
 	 const credentials = {email,password}
 
          try{
-             const response = await fetch("http://localhost:4000/login",{
+             const response = await fetch(baseUrl,{
 	         method: "POST",
 		 headers:{
                     "Content-Type": "application/json",

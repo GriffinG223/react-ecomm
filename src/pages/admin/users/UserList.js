@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import { Link, useNavigate }    from "react-router-dom";
 import { AppContext }           from "../../../AppContext";
 
@@ -14,10 +14,11 @@ export default function UserList(){
     const [currentPage, setCurrentPage] = useState(1)// start at page 1
     const [totalPages, setTotalPages]    = useState(1)
     const pageSize = 5
-
-    async function getUsers(){
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/users?_page=";
+    
+    const getUsers = useCallback(async () => {
         try{
-             const response = await fetch("http://localhost:4000/users?_page="+ currentPage  +"&_limit=" + pageSize,{
+             const response = await fetch(baseUrl + currentPage  +"&_limit=" + pageSize,{
                  method:"GET",
 		 headers:{
 			 Authorization : "Bearer "+ userCredentials.accessToken
@@ -45,13 +46,20 @@ export default function UserList(){
 	catch(error){
             alert("Unable to connect to server")
         }  
-    }// I have a rough understanding of the extent of how this works but
+    },[
+    baseUrl,
+    currentPage,
+    pageSize,
+    userCredentials.accessToken,
+    setUserCredentials,
+    navigate,]);
+	    // I have a rough understanding of the extent of how this works but
      // However, the idea is useEffect applies the effect of an empty function accessing getUsers
      // then whatever is in the array at the bottom is applied to the effect being accessed. So we get users,
      // then reduce them to an array of pages(pagination function below this) then return them into the currentPage button  
-    useEffect(() => {
-        getUsers()
-    }, [currentPage])
+    useEffect(() => {  
+	getUsers();
+    }, [getUsers]);
 
     // pagination functionality
     let paginationButtons = []

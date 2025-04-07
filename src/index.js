@@ -17,10 +17,13 @@ import CreateProduct    from './pages/admin/products/CreateProduct';
 import EditProduct      from './pages/admin/products/EditProduct';
 import Login            from './pages/auth/Login';
 import Register         from './pages/auth/Register';
-import {AppContext}     from './AppContext';
+import UserCart         from './pages/cart/UserCart';
+import CheckoutConfirmation from './pages/cart/CheckoutConfirmation';
+import Receipt          from './pages/cart/Receipt';
+import {AppProvider}     from './AppContext';
 function App(){
 
-	function getStoredCredentials(){
+/*	function getStoredCredentials(){
              let data = localStorage.getItem("credentials")
 	     if (data){
                  let json = JSON.parse(data)
@@ -42,49 +45,94 @@ function App(){
 	//<AdminRoute> below is used to sanitize the browser bar of any foul play,
 	// items in the <AdminRoute></AdminRoute> brackets go to src/components && vim authorization.js,
 	// then the user will be tested in a crucible of truthfulness to get redirected to Admin page or Home
+*/
 	return(
-	    <AppContext.Provider value={{ userCredentials, setUserCredentials} }>	
+	    <AppProvider>	
 	    <BrowserRouter basename={process.env.PUBLIC_URL}>
 	        <Navbar />
 	        
 		<Routes>
-		    <Route path="/"                        element={<Home           />}/>
-		    <Route path="/contact"                 element={<Contact        />}/>
-		    <Route path="/products/:id"            element={<ProductDetails />}/>
-		    <Route path="/profile/"                element={<AuthenticatedUserRoute>
-			                                                <UserProfile />
-			                                            </AuthenticatedUserRoute>}/>   
-
-		    <Route path="/auth/register"           element={<Register       />}/>
-		    <Route path="/auth/login"              element={<Login          />}/>
+		    <Route
+			path="/"                       
+			element={<Home           />}/>
+		    <Route
+			path="/contact"                
+			element={<Contact        />}/>
+		    <Route
+			path="/products/:id"           
+			element={<ProductDetails />}/>
+		    <Route
+			path="/profile/"               
+			element={<AuthenticatedUserRoute>
+				 	<UserProfile />
+			         </AuthenticatedUserRoute>}/>   
+		    <Route
+			path="/auth/register"          
+			element={<Register       />}/>
+		    <Route
+			path="/auth/login"             
+			element={<Login          />}/>
 		    
-		    <Route path="/admin/products"          element={<AdminRoute>
-			                                                <ProductList  />
-			                                            </AdminRoute>}    />
-	           
-		    <Route path="/admin/products/create"   element={<AdminRoute>
-			                                                <CreateProduct/>
-			                                            </AdminRoute>}    />
-	            
-		    <Route path="/admin/products/edit/:id" element={<AdminRoute>
-			                                                <EditProduct/>
-			                                            </AdminRoute>}    />
-		    
-		    <Route path="/admin/users/"            element={<AdminRoute>
-			                                                <UserList/>
-			                                            </AdminRoute>}    />
+		    <Route
+			path="/admin/products"         
+			element={<AdminRoute>
+			        	<ProductList  />
+			          </AdminRoute>}    />
+		    <Route
+			path="/admin/products/create" 
+			element={<AdminRoute>
+					<CreateProduct/>
+			         </AdminRoute>}    />
+		    <Route
+			path="/admin/products/edit/:id"
+		        element={<AdminRoute>
+				 	<EditProduct/>
+	                         </AdminRoute>}    />
+		    <Route
+			path="/admin/users/"           
+		        element={<AdminRoute>
+			         	<UserList/>
+			         </AdminRoute>}    />
                     
-		    <Route path="/admin/users/details/:id" element={<AdminRoute>
-                                                                        <UserDetails/>
-                                                                    </AdminRoute>}    />
+		    <Route
+			path="/admin/users/details/:id"
+			element={<AdminRoute>
+                                 	<UserDetails/>
+                                </AdminRoute>}    />
+         	    <Route
+           		 path="/cart"
+           		 element={
+             		 <AuthenticatedUserRoute>
+               			 <UserCart />
+             		 </AuthenticatedUserRoute>
+            		}
+          	    />
+          	   <Route
+            	   	path="/checkout-confirmation"
+           	  	element={
+              		<AuthenticatedUserRoute>
+               			<CheckoutConfirmation />
+             		</AuthenticatedUserRoute>
+            		}
+          	   />
+          	  
+		   <Route
+           		 path="/receipt"
+           		 element={
+             		 <AuthenticatedUserRoute>
+               			 <Receipt />
+             		 </AuthenticatedUserRoute>
+           		 }
+          	   />
 
-
-		   <Route path="*"                         element={<NotFound/>}      />
-		</Routes>
+		   <Route path="*"                        
+		  	 element={<NotFound/>}     
+		   	/>
+		   </Routes>
 		
 		<Footer />
             </BrowserRouter>
-	    </AppContext.Provider>
+	    </AppProvider>
 	)
 }
 

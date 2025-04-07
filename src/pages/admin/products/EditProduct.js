@@ -1,6 +1,7 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../../AppContext";
+
 
 export default function EditProduct() {
     
@@ -10,9 +11,11 @@ export default function EditProduct() {
     const [validationErrors, setValidationErrors] = useState({})
     const { userCredentials, setUserCredentials } = useContext(AppContext)
     const navigate = useNavigate()
-    function getProduct(){
-        fetch("http://localhost:4000/products/" + params.id)
-	.then(response =>{
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products/";
+
+   const getProduct = useCallback(() => {
+   	 fetch(baseUrl + params.id)
+    	.then(response =>{
            if(response.ok){
 		return response.json()
 	   }
@@ -25,9 +28,12 @@ export default function EditProduct() {
             alert("Unable to read product details.")
 
 	})
-    }
+    }, [baseUrl, params.id]);
 
-    useEffect(getProduct, [])
+    
+	useEffect(() => {
+	  getProduct();
+	  },  [getProduct]);
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -43,7 +49,7 @@ export default function EditProduct() {
         }
 
         try {
-            const response = await fetch("http://localhost:4000/products/"+ params.id, {
+            const response = await fetch(baseUrl+ params.id, {
                 method: "PATCH",
                 headers: {
                     "Authorization": "Bearer " + userCredentials.accessToken

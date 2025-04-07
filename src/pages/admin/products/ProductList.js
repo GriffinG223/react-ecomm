@@ -19,9 +19,10 @@ export default function ProductList(){
 	const {userCredentials, setUserCredentials} = useContext(AppContext)
 	
 	const navigate = useNavigate()
+	const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "//products?&_page=";
 
 	function getProducts(){
-	    let url = "http://localhost:4000/products?&_page="+ currentPage +"&_limit="+
+	    let url = baseUrl+ currentPage +"&_limit="+
 		       pageSize +"&q=" + search +"&_sort=" + sortColumn.column + "&_order=" + sortColumn.orderBy
             console.log("url: " + url)
             
@@ -46,11 +47,11 @@ export default function ProductList(){
 	     })
 	}
         // getProducts, for currentPage  , for search, for sortColumn
-        useEffect(getProducts, [currentPage, search, sortColumn])
-       
+        useEffect(getProducts, [currentPage, search, sortColumn, baseUrl])
 	// THE COMMMAS!! Seriously I spent alot of time debugging this to realize I missed a comma:(
+        const baseUrlD = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products/";
 	function deleteProduct(id){
-            fetch("http://localhost:4000/products/" + id,{
+            fetch(baseUrlD + id,{
 	        method:"DELETE",
 		headers: {// The space following Bearer is important
 			"Authorization": "Bearer " + userCredentials.accessToken
@@ -208,7 +209,9 @@ export default function ProductList(){
                                         {product.price}</td>
                                    
 				    <td>
-                                        <img src={"http://localhost:4000/images/" + product.imageFilename}
+                                        <img src={(process.env.REACT_APP_API_BASE_URL || "http://localhost:4000")
+						+ "/"
+						+ product.imageFilename}
 				             width="100" alt="..." /></td>
                                    
 				    <td>

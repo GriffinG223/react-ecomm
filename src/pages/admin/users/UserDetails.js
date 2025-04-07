@@ -1,5 +1,5 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import {AppContext} from "../../../AppContext"; 
 
 
@@ -9,10 +9,11 @@ export default function UserDetails(){
     const [user,setUser] = useState({})
     const {userCredentials, setUserCredentials} = useContext(AppContext)
     const navigate = useNavigate()
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/users/";
 
-    async function getUserDetails(){
+    const getUserDetails = useCallback(async() =>{
         try{
-            const response = await fetch("http://localhost:4000/users/" + params.id,{
+            const response = await fetch(baseUrl + params.id,{
 		method:"GET" ,
 	        headers:{
                     Authorization: "Bearer " + userCredentials.accessToken
@@ -34,14 +35,11 @@ export default function UserDetails(){
 	catch(error){
             alert("Unable to connect to the server")
 	}
-
-
-
-    }
+    },[baseUrl,params.id,userCredentials.accessToken, setUserCredentials, navigate]);
 
     useEffect(() => {
         getUserDetails()
-    },[])
+    },[getUserDetails]);
 
 
 

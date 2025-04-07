@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function UserProfile(){
    
     const [action, setAction] = useState("default")
-
+   
     return(
         <div className="container my-4">
             <div className = "row">
@@ -62,7 +62,7 @@ export default function UserProfile(){
 
 
 function Details(){
-    
+
     const {userCredentials} = useContext(AppContext)
     return(	
     <>
@@ -101,9 +101,12 @@ function Details(){
 }
 
 function UpdateProfile(){ 
-   
+
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/users/";
     const {userCredentials, setUserCredentials} = useContext(AppContext)
     const navigate = useNavigate()
+    
+
 
     async function handleSubmit(event){
         event.preventDefault()
@@ -117,7 +120,7 @@ function UpdateProfile(){
        }
        
        try{
-            const response = await fetch("http://localhost:4000/users/" + userCredentials.user.id, {
+            const response = await fetch(baseUrl + userCredentials.user.id, {
                  method: "PATCH",
 		 headers: {
                         "Content-Type": "application/json",
@@ -201,7 +204,8 @@ function UpdateProfile(){
 
 
 function UpdatePassword(){
-
+   
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/users/";	
     const{userCredentials, setUserCredentials}= useContext(AppContext)
     const navigate = useNavigate()
 
@@ -223,7 +227,7 @@ function UpdatePassword(){
 	    const passwordObj = {password}
 
 	    try{
-                const response = await fetch("http://localhost:4000/users/" + userCredentials.user.id,{
+                const response = await fetch(baseUrl + userCredentials.user.id,{
 		    method: "PATCH",
 		    headers:{
                         "Content-Type": "application/json",

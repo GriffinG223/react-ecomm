@@ -1,6 +1,7 @@
 import {useEffect,useState} from "react";
 import { Link } from "react-router-dom";
-
+import { useContext } from 'react';
+import { AppContext } from '../AppContext';
 export default function Home(){
        //  Product Functionality
        const [products     , setProducts]      = useState([])
@@ -12,10 +13,13 @@ export default function Home(){
        const [filterParams , setFilterParams]  = useState({brand: "", category: ""})
        // Sort Functionality
        const [sortColumn, setSortColumn] = useState({column: "id" , orderBy:"desc"})
-
+       const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products?_page=";
+     
        function getProducts()  {
-             let url = "http://localhost:4000/products?_page=" + currentPage  + "&_limit=" + pageSize 
-	     if(filterParams.brand){//if all brands is selected then at line 106ish we hit "", that causes us to show all
+             let url = baseUrl + currentPage  + "&_limit=" + pageSize 
+	   
+	     //if all brands is selected then at line 106ish we hit "", that causes us to show all  
+	     if(filterParams.brand){
                  url = url + "&brand=" + filterParams.brand
 
 	     }
@@ -48,7 +52,7 @@ export default function Home(){
         // We have added currentPage/filterParams/sortColumn into our useEffect when the page gets products
 	// These states are the dependancies of the useEffect method :) So basically these functions must work
 	// for useEffect to not be a total nightmare of bugs!?!
-	useEffect(getProducts,[currentPage, filterParams, sortColumn]) 
+	useEffect(getProducts,[currentPage, filterParams, sortColumn, baseUrl]) 
 	
 
 	// Page Functionality applied to buttons
@@ -172,9 +176,11 @@ export default function Home(){
 
 
 function ProductItem({product}){
+    const baseUrlImg = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/images/";
+    const { addItemToCart } = useContext(AppContext);
     return( 
         <div className="rounded border shadow p-4 text-center h-100">
-            <img src={"http://localhost:4000/images/" + product.imageFilename}
+            <img src={baseUrlImg + product.imageFilename}
 	         className="img-fluid" alt="..."
 	         style={{height: "220px", objectFit: "contain"}} />
 	    <hr />
@@ -185,11 +191,12 @@ function ProductItem({product}){
 	    </p>
             <h4 className="mb-2">$ {product.price}</h4>
 	    <Link className="btn btn-primary btn-sm m-2" to={"/products/" + product.id} role="button">Details</Link>
-	</div>
+	    <button className="btn btn-success btn-sm m-2" 
+  		onClick={() => addItemToCart(product)}
+			>Add To Cart
+	   </button>
+	 </div>
 
 
-    )}
-
-
-
-    
+    );
+}    

@@ -10,6 +10,8 @@ export default function CreateProduct() {
 
     const navigate = useNavigate()
 
+    const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products";
+
     async function handleSubmit(event) {
         event.preventDefault()
 
@@ -24,7 +26,7 @@ export default function CreateProduct() {
         }
 
         try {
-            const response = await fetch("http://localhost:4000/products", {
+            const response = await fetch(baseUrl, {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + userCredentials.accessToken

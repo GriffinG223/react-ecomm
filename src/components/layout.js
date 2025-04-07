@@ -43,6 +43,7 @@ export function Navbar(){
 		      userCredentials && userCredentials.user.role === "admin" &&
 		      <ul className="navbar-nav">
 		          <li className="nav-item dropdown">
+			    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
                               <a className="nav-link dropdown-toggle text-dark" href="#"
 		                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Admin
@@ -64,7 +65,8 @@ export function Navbar(){
                       userCredentials && userCredentials.user.role !== "admin" &&
                       <ul className="navbar-nav">
                           <li className="nav-item dropdown">
-                              <a className="nav-link dropdown-toggle text-dark" href="#"
+                             	{/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}	
+			     <a className="nav-link dropdown-toggle text-dark" href="#"
                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Customer
                              </a>

@@ -11,7 +11,7 @@ export function AdminRoute(props){
     // IF it works it returns the properties to it's calling children 
     const {userCredentials}= useContext(AppContext)
     if (!userCredentials || userCredentials.user.role !== "admin"){
-        return <Navigate to="/" />
+        return <Navigate to="/" replace />
 
     }
 	
@@ -22,7 +22,7 @@ export function AdminRoute(props){
 export function AuthenticatedUserRoute({children}){
     const {userCredentials}= useContext(AppContext)
     if (!userCredentials ){
-        return <Navigate to="/" />
+        return <Navigate to="/" replace/>
 
     }
 
@@ -33,7 +33,7 @@ export function AuthenticatedUserRoute({children}){
 export function VisitorRoute({children}){
     const {userCredentials}= useContext(AppContext)
     if (!userCredentials){
-        return <Navigate to="/" />
+        return <Navigate to="/" replace/>
 
     }
 

@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import {useParams} from "react-router-dom";
 
 
@@ -6,9 +6,13 @@ export default function ProductDetails(){
 
      const params = useParams()
      const[product,setProduct]=useState({})
-     async function getProductDetails(){
+     const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products/";
+     const baseUrlImg = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/images/";
+   
+     	
+     const getProductDetails= useCallback(async () =>{
           try{
-              let response = await fetch("http://localhost:4000/products/" + params.id)
+              let response = await fetch(baseUrl + params.id)
               let data = await response.json()
 	      if (response.ok){
                  setProduct(data)
@@ -21,15 +25,17 @@ export default function ProductDetails(){
                alert("Unable to connect to server")
            
 	  }
-
-     } // b.c we are calling an async function when need to call an empty function with it assigned to it
+     }, [baseUrl, params.id]);
+     // b.c we are calling an async function when need to call an empty function with it assigned to it
+     
      useEffect( () => {
-          getProductDetails()},[])
+          getProductDetails()
+     },[baseUrl, params.id, getProductDetails]);
      return(
 	     <div className="container my-4">
                 <div className = "row">
 	            <div className = "col-md-4 text-center">
-	                <img src={"http://localhost:4000/images/" + product.imageFilename }
+			<img src={baseUrlImg + product.imageFilename }
 	                     className="img-fluid" alt="..." width="250" />
 	            </div>
 	           

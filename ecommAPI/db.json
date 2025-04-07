@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "admin@admin.com",
-      "password": "$2a$10$bH1jqguVJD7s9LtbW/PLRe5pZ7Mu4qiq8IkkNgBtpd/nVUVK9KdIS",
+      "password": "$2a$10$29jLKn4KXP3Z1x9HxEOXiuefhNlPadZHKp53rPvscWPBSky.AUV6i",
       "firstname": "Admin",
       "lastname": "01",
       "phone": "",
@@ -126,6 +126,15 @@
       "phone": "2103258570",
       "address": "sfds lane",
       "id": 14
+    },
+    {
+      "email": "griffing223@gmail.com",
+      "password": "$2a$10$29jLKn4KXP3Z1x9HxEOXiuefhNlPadZHKp53rPvscWPBSky.AUV6i",
+      "firstname": "Griffin",
+      "lastname": "Giorda",
+      "phone": "",
+      "address": "",
+      "id": 15
     }
   ],
   "products": [
