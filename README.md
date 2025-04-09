@@ -7,4 +7,4 @@
 - Should make cloning/deploying faster since Docker already runs *npm install*
 
 ## To-Do
-- Improve UI/UX
+- Improve UI/UX for screen readers
