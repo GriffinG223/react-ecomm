@@ -135,6 +135,15 @@
       "phone": "",
       "address": "",
       "id": 15
+    },
+    {
+      "email": "djxevan23@gmail.com",
+      "password": "$2a$10$CYOaluQMjXC4f82Q2HdwHOTqn3S6teQ4hzCzmqfkmvlw8C9GeaTc6",
+      "firstname": "Evan",
+      "lastname": "Garcia",
+      "phone": "8303226406",
+      "address": "301 s kerr",
+      "id": 16
     }
   ],
   "products": [
