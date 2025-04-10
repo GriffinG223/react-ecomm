@@ -131,8 +131,7 @@
       "phone": "2103258570",
       "address": "sfds lane",
       "id": 14
-    },
-
+    }
   ],
   "products": [
     {
@@ -445,3 +444,15 @@
       "createdAt": "2023-12-29T14:16:27.551Z",
       "id": 33
     },
+    {
+      "name": "Jasper",
+      "brand": "Not For Sale!",
+      "category": "Other",
+      "price": "123",
+      "description": "He is a very good dog! Sometimes...",
+      "imageFilename": "1740185443663_20240324_155624.jpg",
+      "createdAt": "2025-02-22T00:50:43.689Z",
+      "id": 35
+    }
+  ]
+}
