@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "admin@admin.com",
-      "password": "$2a$10$29jLKn4KXP3Z1x9HxEOXiuefhNlPadZHKp53rPvscWPBSky.AUV6i",
+      "password": "$2a$10$bH1jqguVJD7s9LtbW/PLRe5pZ7Mu4qiq8IkkNgBtpd/nVUVK9KdIS",
       "firstname": "Admin",
       "lastname": "01",
       "phone": "",
@@ -120,6 +120,11 @@
     },
     {
       "email": "simple@yahoo.com",
+      "address": "California, USA",
+      "id": 13
+    },
+    {
+      "email": "simple@yahoo.com",
       "password": "$2a$10$ne0R0/QZPHjjPehtzWCmPe9YVxc8tbxOF1a2yGZwTU8B6hTiXW26O",
       "firstname": "simpleUser",
       "lastname": "sample",
@@ -127,15 +132,7 @@
       "address": "sfds lane",
       "id": 14
     },
-    {
-      "email": "griffing223@gmail.com",
-      "password": "$2a$10$29jLKn4KXP3Z1x9HxEOXiuefhNlPadZHKp53rPvscWPBSky.AUV6i",
-      "firstname": "Griffin",
-      "lastname": "Giorda",
-      "phone": "",
-      "address": "",
-      "id": 15
-    }
+
   ],
   "products": [
     {
@@ -448,15 +445,3 @@
       "createdAt": "2023-12-29T14:16:27.551Z",
       "id": 33
     },
-    {
-      "name": "Jasper",
-      "brand": "Not For Sale!",
-      "category": "Other",
-      "price": "123",
-      "description": "He is a very good dog! Sometimes...",
-      "imageFilename": "1740185443663_20240324_155624.jpg",
-      "createdAt": "2025-02-22T00:50:43.689Z",
-      "id": 35
-    }
-  ]
-}

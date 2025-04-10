@@ -15,6 +15,11 @@ export default function Home(){
        const [sortColumn, setSortColumn] = useState({column: "id" , orderBy:"desc"})
        const baseUrl = (process.env.REACT_APP_API_BASE_URL || "http://localhost:4000") + "/products?_page=";
      
+
+       // Search Functionality
+       const [searchQuery, setSearchQuery] = useState("")
+
+
        function getProducts()  {
              let url = baseUrl + currentPage  + "&_limit=" + pageSize 
 	   
@@ -26,6 +31,9 @@ export default function Home(){
 	     if(filterParams.category){ // the same applies for category at line 120ish  
                  url = url + "&category=" + filterParams.category
 	     }
+             if(searchQuery) {
+                 url = url + "&q=" + searchQuery
+             }
              url = url + "&_sort=" + sortColumn.column  + "&_order=" + sortColumn.orderBy
 	     console.log("url=" + url)
 
@@ -52,7 +60,9 @@ export default function Home(){
         // We have added currentPage/filterParams/sortColumn into our useEffect when the page gets products
 	// These states are the dependancies of the useEffect method :) So basically these functions must work
 	// for useEffect to not be a total nightmare of bugs!?!
-	useEffect(getProducts,[currentPage, filterParams, sortColumn, baseUrl]) 
+
+	useEffect(getProducts,[currentPage, filterParams, sortColumn, searchQuery]) 
+
 	
 
 	// Page Functionality applied to buttons
@@ -72,7 +82,7 @@ export default function Home(){
             )
 
         }
-       
+
        function handleBrandFilter(event){
             let brand = event.target.value
 	    setFilterParams({...filterParams, brand: brand })// the ... is the spread operator in this context
@@ -82,6 +92,12 @@ export default function Home(){
        function handleCategoryFilter(event){
            let category = event.target.value
 	   setFilterParams({...filterParams, category: category})    
+           setCurrentPage(1)
+       }
+       
+       function handleSearch(event){
+           let query = event.target.value
+           setSearchQuery(query)
            setCurrentPage(1)
        }
        
@@ -112,6 +128,22 @@ export default function Home(){
 
            <div className="bg-light">
 	       <div className="container py-5">
+	           <div className="row mb-3">
+                   <div className="col-md-12">
+                       <div className="input-group mb-3">
+                           <input 
+                               type="text" 
+                               className="form-control" 
+                               placeholder="Search products..." 
+                               value={searchQuery}
+                               onChange={handleSearch}
+                           />
+                           <button className="btn btn-outline-primary" type="button">
+                               <i className="bi bi-search"></i> Search
+                           </button>
+                       </div>
+                   </div>
+               </div>
 	           <div className="row mb-5 g-2"> 
 	               <div className="col-md-6">
                            <h4>Products</h4>
@@ -200,3 +232,10 @@ function ProductItem({product}){
 
     );
 }    
+
+
+
+
+
+
+
