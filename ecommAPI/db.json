@@ -131,6 +131,27 @@
       "phone": "2103258570",
       "address": "sfds lane",
       "id": 14
+<<<<<<< HEAD
+=======
+    },
+    {
+      "email": "griffing223@gmail.com",
+      "password": "$2a$10$29jLKn4KXP3Z1x9HxEOXiuefhNlPadZHKp53rPvscWPBSky.AUV6i",
+      "firstname": "Griffin",
+      "lastname": "Giorda",
+      "phone": "",
+      "address": "",
+      "id": 15
+    },
+    {
+      "email": "djxevan23@gmail.com",
+      "password": "$2a$10$CYOaluQMjXC4f82Q2HdwHOTqn3S6teQ4hzCzmqfkmvlw8C9GeaTc6",
+      "firstname": "Evan",
+      "lastname": "Garcia",
+      "phone": "8303226406",
+      "address": "301 s kerr",
+      "id": 16
+>>>>>>> e514108e6a8a976d4530cad3d464ef15ab7e6569
     }
   ],
   "products": [

@@ -27,8 +27,8 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy your custom Nginx configuration file
 COPY nginx.conf /etc/nginx/conf.d/
 
-# Copy the build output from the first stage into Nginx's html folder
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy the build output from the first stage into Nginx's html folder in a subdirectory (as defined by homepage)
+COPY --from=build /app/build /usr/share/nginx/html/ecommDotComm
 
 # Expose ports for HTTP and HTTPS
 EXPOSE 80
