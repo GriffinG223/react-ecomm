@@ -8,7 +8,9 @@ RUN npm install
 
 # Copy the rest of your application code and build the app
 COPY . .
-RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+# RUN npm run build
 
 # Stage 2: Serve the App with Nginx
 FROM nginx:alpine
